@@ -8,11 +8,11 @@ pollutantmean <- function(pollutant, ID = 1:332){
             csvlist <- read.csv(paste('specdata/0',toString(i),'.csv', sep = ''))
         if(i >= 100)
             csvlist <- read.csv(paste('specdata/',toString(i),'.csv', sep = ''))
-        y <- csvlist$pollutant
+        y <- csvlist[toString(pollutant)]
         z <- y[!is.na(y)]
         x <- x + mean(z)
     }   
     
     
-    mean(x)
+    x/length(ID)
 }
