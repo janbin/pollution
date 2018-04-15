@@ -1,5 +1,6 @@
 complete <- function(directory, id = 1:332){
-  nobs <- rep(0, length(id), names = id)
+  nobs <- rep(0, length(id))
+  names(nobs) <- id
   for( i in id){
     if (i <10)
       csvlist <- read.csv(paste(directory, '/00',toString(i),'.csv',sep = ''))
@@ -8,12 +9,12 @@ complete <- function(directory, id = 1:332){
     if(i >= 100){
       csvlist <- read.csv(paste(directory,'/',toString(i),'.csv', sep = ''))
     }
-    a <- csvlist["nitrate"]
-    b <- csvlist["sulfate"]
+    a <- csvlist[["nitrate"]]
+    b <- csvlist[["sulfate"]]
     count <- 0
-    for (j in length(a)){
-      if (!is.na(a[j]) && !is.na(b[j])){
-        count -> count + 1
+    for (j in 1:length(a)){
+      if (!is.na(a[j]) & !is.na(b[j])){
+        count <- count + 1
       }
     nobs[toString(i)] <- count
     }
